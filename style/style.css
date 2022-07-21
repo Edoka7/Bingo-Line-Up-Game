@@ -91,6 +91,9 @@ h1 {
   margin: 5px 3px;
   width: 71px;
 }
+.game__board [data-column] [data-row].active {
+  background-image: url("../src/red_chip.svg");
+}
 .game__board [data-column].active::after {
   content: "";
   position: absolute;

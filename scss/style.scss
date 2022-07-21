@@ -78,6 +78,10 @@ h1 {
         height: 71px;
         margin: 5px 3px;
         width: 71px;
+
+        &.active {
+          background-image: url("../src/red_chip.svg");
+        }
       }
 
       &.active {
