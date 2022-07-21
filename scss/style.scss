@@ -25,7 +25,7 @@ h1 {
   text-align: center;
   font-weight: 600;
   font-size: 5rem;
-  width: 55%;
+  width: 65%;
 }
 
 .scores {
@@ -110,5 +110,32 @@ h1 {
     position: absolute;
     top: 100%;
     width: 100%;
+  }
+}
+
+.windowError {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(30px);
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  p {
+    color: #fff;
+    font-size: 2.5rem;
+    padding: 10px 50px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .windowError {
+    display: flex;
   }
 }
