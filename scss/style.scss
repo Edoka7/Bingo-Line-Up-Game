@@ -1,6 +1,107 @@
 * {
+  box-sizing: border-box;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  background: #00416d;
+}
+
+body {
+  background: rgb(123, 63, 251);
+  background: radial-gradient(
+    circle,
+    rgba(123, 63, 251, 1) 0%,
+    rgba(67, 26, 83, 1) 100%
+  );
+  overflow: hidden;
+}
+
+h1 {
+  border-bottom: 2px solid #ff0cff;
+  color: rgb(255, 9, 144);
+  margin: 25px auto;
+  padding-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 5rem;
+  width: 55%;
+}
+
+.scores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  p {
+    color: #3da6ec;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    padding: 10px 40px;
+    text-transform: uppercase;
+
+    span {
+      color: #afcbff;
+      font-size: 3rem;
+      font-weight: 600;
+    }
+
+    &:first-child {
+      font-size: 3rem;
+      font-weight: 600;
+      flex-basis: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.game {
+  align-items: flex-end;
+  display: flex;
+  height: 600px;
+  justify-content: center;
+  margin: 60px auto;
+  position: relative;
+  width: 100%;
+
+  &__board {
+    display: flex;
+    margin-bottom: 50px;
+
+    [data-column] {
+      border: 2px solid black;
+      display: flex;
+      flex-direction: column;
+
+      [data-row] {
+        height: 71px;
+        margin: 5px 3px;
+        width: 71px;
+
+        background: red;
+
+        &:nth-child(even) {
+          background: yellow;
+        }
+      }
+    }
+  }
+
+  &__board-img {
+    pointer-events: none;
+    position: absolute;
+    user-select: none;
+    width: 730px;
+  }
+
+  &::before {
+    content: "";
+    background: #2c043b;
+    display: block;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }
 }
