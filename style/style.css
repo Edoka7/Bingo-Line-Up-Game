@@ -84,15 +84,21 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 .game__board [data-column] [data-row] {
   height: 71px;
   margin: 5px 3px;
   width: 71px;
-  background: red;
 }
-.game__board [data-column] [data-row]:nth-child(even) {
-  background: yellow;
+.game__board [data-column].active::after {
+  content: "";
+  position: absolute;
+  bottom: 105%;
+  left: 3px;
+  width: 71px;
+  height: 71px;
+  background-image: url("../src/red_chip.svg");
 }
 .game__board-img {
   pointer-events: none;
