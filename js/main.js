@@ -25,54 +25,6 @@ const gameState = [
   ["", "", "", "", "", ""],
 ];
 
-const changePlayer = () => {
-  if (playerTurn === "red") {
-    playerTurn = "yellow";
-  } else {
-    playerTurn = "red";
-  }
-};
-
-const checkRow = (columnIndex) => {
-  if (gameboard[columnIndex][0].classList.contains("active")) {
-    if (gameboard[columnIndex][1].classList.contains("active")) {
-      if (gameboard[columnIndex][2].classList.contains("active")) {
-        if (gameboard[columnIndex][3].classList.contains("active")) {
-          if (gameboard[columnIndex][4].classList.contains("active")) {
-            if (gameboard[columnIndex][5].classList.contains("active")) {
-              return;
-            }
-            gameboard[columnIndex][5].classList.add("active", playerTurn);
-            gameState[columnIndex][5] = playerTurn;
-            changePlayer();
-            return;
-          }
-          gameboard[columnIndex][4].classList.add("active", playerTurn);
-          gameState[columnIndex][4] = playerTurn;
-          changePlayer();
-          return;
-        }
-        gameboard[columnIndex][3].classList.add("active", playerTurn);
-        gameState[columnIndex][3] = playerTurn;
-        changePlayer();
-        return;
-      }
-      gameboard[columnIndex][2].classList.add("active", playerTurn);
-      gameState[columnIndex][2] = playerTurn;
-      changePlayer();
-      return;
-    }
-    gameboard[columnIndex][1].classList.add("active", playerTurn);
-    gameState[columnIndex][1] = playerTurn;
-    changePlayer();
-    return;
-  }
-  gameboard[columnIndex][0].classList.add("active", playerTurn);
-  gameState[columnIndex][0] = playerTurn;
-  changePlayer();
-  return;
-};
-
 const checkColumn = (e) => {
   if (e.currentTarget.dataset.column === "one") {
     return 0;
@@ -91,8 +43,44 @@ const checkColumn = (e) => {
   } else return null;
 };
 
+const checkRow = (columnIndex) => {
+  if (gameboard[columnIndex][0].classList.contains("active")) {
+    if (gameboard[columnIndex][1].classList.contains("active")) {
+      if (gameboard[columnIndex][2].classList.contains("active")) {
+        if (gameboard[columnIndex][3].classList.contains("active")) {
+          if (gameboard[columnIndex][4].classList.contains("active")) {
+            if (gameboard[columnIndex][5].classList.contains("active")) {
+              return false;
+            }
+            return 5;
+          }
+          return 4;
+        }
+        return 3;
+      }
+      return 2;
+    }
+    return 1;
+  }
+  return 0;
+};
+
+const changePlayer = () => {
+  if (playerTurn === "red") {
+    playerTurn = "yellow";
+  } else {
+    playerTurn = "red";
+  }
+};
+
 const addChip = (e) => {
-  checkRow(checkColumn(e));
+  let columnIndex = checkColumn(e);
+  let rowIndex = checkRow(columnIndex);
+
+  gameboard[columnIndex][rowIndex].classList.add("active", playerTurn);
+  gameState[columnIndex][rowIndex] = playerTurn;
+
+  changePlayer();
 };
 
 const eventBinds = () => {
