@@ -1,6 +1,10 @@
 const columns = document.querySelectorAll("[data-column]");
 const rows = document.querySelectorAll("[data-row]");
 
+let isThrottled = false;
+
+let playerTurn = "red";
+
 const gameboard = [
   [rows[0], rows[1], rows[2], rows[3], rows[4], rows[5]],
   [rows[6], rows[7], rows[8], rows[9], rows[10], rows[11]],
@@ -11,29 +15,62 @@ const gameboard = [
   [rows[36], rows[37], rows[38], rows[39], rows[40], rows[41]],
 ];
 
-console.log(columns);
-console.log(rows);
+const gameState = [
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+  ["", "", "", "", "", ""],
+];
+
+const changePlayer = () => {
+  if (playerTurn === "red") {
+    playerTurn = "yellow";
+  } else {
+    playerTurn = "red";
+  }
+};
 
 const checkRow = (columnIndex) => {
-  if (gameboard[columnIndex][5].classList.contains("active")) {
-    if (gameboard[columnIndex][4].classList.contains("active")) {
-      if (gameboard[columnIndex][3].classList.contains("active")) {
-        if (gameboard[columnIndex][2].classList.contains("active")) {
-          if (gameboard[columnIndex][1].classList.contains("active")) {
-            if (gameboard[columnIndex][0].classList.contains("active")) {
+  if (gameboard[columnIndex][0].classList.contains("active")) {
+    if (gameboard[columnIndex][1].classList.contains("active")) {
+      if (gameboard[columnIndex][2].classList.contains("active")) {
+        if (gameboard[columnIndex][3].classList.contains("active")) {
+          if (gameboard[columnIndex][4].classList.contains("active")) {
+            if (gameboard[columnIndex][5].classList.contains("active")) {
               return;
             }
-            gameboard[columnIndex][0].classList.add("active");
+            gameboard[columnIndex][5].classList.add("active", playerTurn);
+            gameState[columnIndex][5] = playerTurn;
+            changePlayer();
+            return;
           }
-          gameboard[columnIndex][1].classList.add("active");
+          gameboard[columnIndex][4].classList.add("active", playerTurn);
+          gameState[columnIndex][4] = playerTurn;
+          changePlayer();
+          return;
         }
-        gameboard[columnIndex][2].classList.add("active");
+        gameboard[columnIndex][3].classList.add("active", playerTurn);
+        gameState[columnIndex][3] = playerTurn;
+        changePlayer();
+        return;
       }
-      gameboard[columnIndex][3].classList.add("active");
+      gameboard[columnIndex][2].classList.add("active", playerTurn);
+      gameState[columnIndex][2] = playerTurn;
+      changePlayer();
+      return;
     }
-    gameboard[columnIndex][4].classList.add("active");
+    gameboard[columnIndex][1].classList.add("active", playerTurn);
+    gameState[columnIndex][1] = playerTurn;
+    changePlayer();
+    return;
   }
-  gameboard[columnIndex][5].classList.add("active");
+  gameboard[columnIndex][0].classList.add("active", playerTurn);
+  gameState[columnIndex][0] = playerTurn;
+  changePlayer();
+  return;
 };
 
 const checkColumn = (e) => {
@@ -55,17 +92,25 @@ const checkColumn = (e) => {
 };
 
 const addChip = (e) => {
+  // if (isThrottled) return;
+
+  // isThrottled = true;
+
+  // setTimeout(() => {
+  //   isThrottled = false;
+  // }, 250);
+
   checkRow(checkColumn(e));
 };
 
 const eventBinds = () => {
   columns.forEach((column) => {
     column.addEventListener("mouseover", () => {
-      column.classList.add("active");
+      column.classList.add("active", playerTurn);
     });
 
     column.addEventListener("mouseout", () => {
-      column.classList.remove("active");
+      column.classList.remove("active", playerTurn);
     });
 
     column.addEventListener("click", (e) => {

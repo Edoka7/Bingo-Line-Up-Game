@@ -81,9 +81,9 @@ h1 {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
   position: relative;
 }
 .game__board [data-column] [data-row] {
@@ -91,8 +91,11 @@ h1 {
   margin: 5px 3px;
   width: 71px;
 }
-.game__board [data-column] [data-row].active {
+.game__board [data-column] [data-row].active.red {
   background-image: url("../src/red_chip.svg");
+}
+.game__board [data-column] [data-row].active.yellow {
+  background-image: url("../src/yellow_chip.svg");
 }
 .game__board [data-column].active::after {
   content: "";
@@ -101,7 +104,12 @@ h1 {
   left: 3px;
   width: 71px;
   height: 71px;
+}
+.game__board [data-column].active.red::after {
   background-image: url("../src/red_chip.svg");
+}
+.game__board [data-column].active.yellow::after {
+  background-image: url("../src/yellow_chip.svg");
 }
 .game__board-img {
   pointer-events: none;
