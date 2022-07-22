@@ -15,14 +15,14 @@ const gameboard = [
   [rows[36], rows[37], rows[38], rows[39], rows[40], rows[41]],
 ];
 
-const gameState = [
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
-  ["", "", "", "", "", ""],
+let gameState = [
+  ["a", "b", "c", "d", "e", "f"],
+  ["f", "e", "d", "c", "b", "a"],
+  ["a", "b", "c", "d", "e", "f"],
+  ["f", "e", "d", "c", "b", "a"],
+  ["a", "b", "c", "d", "e", "f"],
+  ["f", "e", "d", "c", "b", "a"],
+  ["a", "b", "c", "d", "e", "f"],
 ];
 
 const checkColumn = (e) => {
@@ -65,6 +65,69 @@ const checkRow = (columnIndex) => {
   return 0;
 };
 
+const checkWin = (columnIndex, rowIndex) => {
+  let result = false;
+
+  if (
+    // Columns
+    (gameState[columnIndex][0] === gameState[columnIndex][1] &&
+      gameState[columnIndex][1] === gameState[columnIndex][2] &&
+      gameState[columnIndex][2] === gameState[columnIndex][3]) ||
+    (gameState[columnIndex][1] === gameState[columnIndex][2] &&
+      gameState[columnIndex][2] === gameState[columnIndex][3] &&
+      gameState[columnIndex][3] === gameState[columnIndex][4]) ||
+    (gameState[columnIndex][2] === gameState[columnIndex][3] &&
+      gameState[columnIndex][3] === gameState[columnIndex][4] &&
+      gameState[columnIndex][4] === gameState[columnIndex][5])
+  ) {
+    return (result = true);
+  } else if (
+    // Rows
+    (gameState[0][rowIndex] === gameState[1][rowIndex] &&
+      gameState[1][rowIndex] === gameState[2][rowIndex] &&
+      gameState[2][rowIndex] === gameState[3][rowIndex]) ||
+    (gameState[1][rowIndex] === gameState[2][rowIndex] &&
+      gameState[2][rowIndex] === gameState[3][rowIndex] &&
+      gameState[3][rowIndex] === gameState[4][rowIndex]) ||
+    (gameState[2][rowIndex] === gameState[3][rowIndex] &&
+      gameState[3][rowIndex] === gameState[4][rowIndex] &&
+      gameState[4][rowIndex] === gameState[5][rowIndex]) ||
+    (gameState[3][rowIndex] === gameState[4][rowIndex] &&
+      gameState[4][rowIndex] === gameState[5][rowIndex] &&
+      gameState[5][rowIndex] === gameState[6][rowIndex])
+  ) {
+    return (result = true);
+  }
+
+  setTimeout(() => {
+    result = false;
+  }, 10);
+
+  return result;
+};
+
+const resetGame = () => {
+  gameState = [
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+  ];
+
+  columns.forEach((column) => {
+    column.classList.remove("active", "red", "yellow");
+  });
+
+  rows.forEach((row) => {
+    removeClass(row);
+  });
+
+  playerTurn = "red";
+};
+
 const changePlayer = () => {
   if (playerTurn === "red") {
     playerTurn = "yellow";
@@ -80,7 +143,15 @@ const addChip = (e) => {
   gameboard[columnIndex][rowIndex].classList.add("active", playerTurn);
   gameState[columnIndex][rowIndex] = playerTurn;
 
+  if (checkWin(columnIndex, rowIndex)) {
+    return resetGame();
+  }
+
   changePlayer();
+};
+
+const removeClass = (element) => {
+  element.classList.remove("active", "red", "yellow");
 };
 
 const eventBinds = () => {
@@ -90,14 +161,12 @@ const eventBinds = () => {
     });
 
     column.addEventListener("mouseout", () => {
-      column.classList.remove("active", "red");
-      column.classList.remove("active", "yellow");
+      removeClass(column);
     });
 
     column.addEventListener("click", (e) => {
       addChip(e);
-      column.classList.remove("active", "red");
-      column.classList.remove("active", "yellow");
+      removeClass(column);
       column.classList.add("active", playerTurn);
     });
   });
