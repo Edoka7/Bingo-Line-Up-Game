@@ -92,14 +92,6 @@ const checkColumn = (e) => {
 };
 
 const addChip = (e) => {
-  // if (isThrottled) return;
-
-  // isThrottled = true;
-
-  // setTimeout(() => {
-  //   isThrottled = false;
-  // }, 250);
-
   checkRow(checkColumn(e));
 };
 
@@ -110,11 +102,15 @@ const eventBinds = () => {
     });
 
     column.addEventListener("mouseout", () => {
-      column.classList.remove("active", playerTurn);
+      column.classList.remove("active", "red");
+      column.classList.remove("active", "yellow");
     });
 
     column.addEventListener("click", (e) => {
       addChip(e);
+      column.classList.remove("active", "red");
+      column.classList.remove("active", "yellow");
+      column.classList.add("active", playerTurn);
     });
   });
 };
