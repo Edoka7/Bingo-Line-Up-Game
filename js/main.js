@@ -97,6 +97,78 @@ const checkWin = (columnIndex, rowIndex) => {
       gameState[5][rowIndex] === gameState[6][rowIndex])
   ) {
     return (result = true);
+  } else if (
+    // Skews from bottom to top
+    (gameState[0][2] === gameState[1][3] &&
+      gameState[1][3] === gameState[2][4] &&
+      gameState[2][4] === gameState[3][5]) ||
+    (gameState[1][2] === gameState[2][3] &&
+      gameState[2][3] === gameState[3][4] &&
+      (gameState[0][1] === gameState[1][2] ||
+        gameState[3][4] === gameState[4][5])) ||
+    (gameState[0][0] === gameState[1][1] &&
+      gameState[1][1] === gameState[2][2] &&
+      gameState[2][2] === gameState[3][3]) ||
+    (gameState[1][1] === gameState[2][2] &&
+      gameState[2][2] === gameState[3][3] &&
+      gameState[3][3] === gameState[4][4]) ||
+    (gameState[2][2] === gameState[3][3] &&
+      gameState[3][3] === gameState[4][4] &&
+      gameState[4][4] === gameState[5][5]) ||
+    (gameState[1][0] === gameState[2][1] &&
+      gameState[2][1] === gameState[3][2] &&
+      gameState[3][2] === gameState[4][3]) ||
+    (gameState[2][1] === gameState[3][2] &&
+      gameState[3][2] === gameState[4][3] &&
+      gameState[4][3] === gameState[5][4]) ||
+    (gameState[3][2] === gameState[4][3] &&
+      gameState[4][3] === gameState[5][4] &&
+      gameState[5][4] === gameState[6][5]) ||
+    (gameState[3][1] === gameState[4][2] &&
+      gameState[4][2] === gameState[5][3] &&
+      (gameState[2][0] === gameState[3][1] ||
+        gameState[5][3] === gameState[6][4])) ||
+    (gameState[3][0] === gameState[4][1] &&
+      gameState[4][1] === gameState[5][2] &&
+      gameState[5][2] === gameState[6][3])
+  ) {
+    return (result = true);
+  } else if (
+    // Skews from top to bottom
+    (gameState[0][3] === gameState[1][2] &&
+      gameState[1][2] === gameState[2][1] &&
+      gameState[2][1] === gameState[3][0]) ||
+    (gameState[1][3] === gameState[2][2] &&
+      gameState[2][2] === gameState[3][1] &&
+      (gameState[0][4] === gameState[1][3] ||
+        gameState[3][1] === gameState[4][0])) ||
+    (gameState[0][5] === gameState[1][4] &&
+      gameState[1][4] === gameState[2][3] &&
+      gameState[2][3] === gameState[3][2]) ||
+    (gameState[1][4] === gameState[2][3] &&
+      gameState[2][3] === gameState[3][2] &&
+      gameState[3][2] === gameState[4][1]) ||
+    (gameState[2][3] === gameState[3][2] &&
+      gameState[3][2] === gameState[4][1] &&
+      gameState[4][1] === gameState[5][0]) ||
+    (gameState[1][5] === gameState[2][4] &&
+      gameState[2][4] === gameState[3][3] &&
+      gameState[3][3] === gameState[4][2]) ||
+    (gameState[2][4] === gameState[3][3] &&
+      gameState[3][3] === gameState[4][2] &&
+      gameState[4][2] === gameState[5][1]) ||
+    (gameState[3][3] === gameState[4][2] &&
+      gameState[4][2] === gameState[5][1] &&
+      gameState[5][1] === gameState[6][0]) ||
+    (gameState[3][4] === gameState[4][3] &&
+      gameState[4][3] === gameState[5][2] &&
+      (gameState[2][5] === gameState[3][4] ||
+        gameState[5][2] === gameState[6][1])) ||
+    (gameState[3][5] === gameState[4][4] &&
+      gameState[4][4] === gameState[5][3] &&
+      gameState[5][3] === gameState[6][2])
+  ) {
+    return (result = true);
   }
 
   setTimeout(() => {
