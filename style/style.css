@@ -148,6 +148,7 @@ h1 {
       -ms-flex-pack: center;
           justify-content: center;
   left: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   width: 100%;
@@ -160,6 +161,9 @@ h1 {
 }
 
 @media screen and (max-width: 780px) {
+  .game {
+    overflow: hidden;
+  }
   .windowError {
     display: -webkit-box;
     display: -ms-flexbox;

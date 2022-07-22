@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-
   font-family: "Poppins", sans-serif;
   font-size: 10px;
   margin: 0;
@@ -135,6 +134,7 @@ h1 {
   height: 100vh;
   justify-content: center;
   left: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   width: 100%;
@@ -148,6 +148,10 @@ h1 {
 }
 
 @media screen and (max-width: 780px) {
+  .game {
+    overflow: hidden;
+  }
+
   .windowError {
     display: flex;
   }
