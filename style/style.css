@@ -10,7 +10,6 @@
 body {
   background: rgb(123, 63, 251);
   background: radial-gradient(circle, rgb(123, 63, 251) 0%, rgb(67, 26, 83) 100%);
-  overflow: hidden;
 }
 
 h1 {
@@ -161,7 +160,8 @@ h1 {
 }
 
 @media screen and (max-width: 780px) {
-  .game {
+  body,
+.game {
     overflow: hidden;
   }
   .windowError {
