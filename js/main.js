@@ -1,9 +1,16 @@
 const columns = document.querySelectorAll("[data-column]");
 const rows = document.querySelectorAll("[data-row]");
+const resultInfo = document.querySelector(".windowWin");
+const playAgainBTN = document.querySelector(".windowWin button");
 
 let isThrottled = false;
 
 let playerTurn = "red";
+
+let redScore = 0,
+  yellowScore = 0,
+  drawScore = 0,
+  gameScore = 0;
 
 const gameboard = [
   [rows[0], rows[1], rows[2], rows[3], rows[4], rows[5]],
@@ -178,7 +185,62 @@ const checkWin = (columnIndex, rowIndex) => {
   return result;
 };
 
+const checkDraw = () => {
+  const isDrawFunc = () => {
+    return gameboard.every((column, index) => {
+      return column.every((row) => {
+        return row.classList.contains("active");
+      });
+    });
+  };
+
+  let isDraw = isDrawFunc();
+
+  return isDraw;
+};
+
+const renderResult = (whoWin) => {
+  if (whoWin === "draw") {
+    document.querySelector(".windowWin p").textContent = "DRAW!";
+    drawScore++;
+  } else if (whoWin === "red") {
+    document.querySelector(".windowWin p").textContent = "The red player won!";
+    redScore++;
+  } else if (whoWin === "yellow") {
+    document.querySelector(".windowWin p").textContent =
+      "The yellow player won!";
+    yellowScore++;
+  }
+
+  gameScore++;
+
+  renderScore();
+
+  resultInfo.classList.add("active");
+};
+
+const renderScore = () => {
+  document.querySelector(".yellowScore").textContent = yellowScore;
+  document.querySelector(".redScore").textContent = redScore;
+  document.querySelector(".draws").textContent = drawScore;
+  document.querySelector(".games").textContent = gameScore;
+};
+
+const checkResult = (result) => {
+  if (result === "draw") {
+    renderResult("draw");
+  } else if (result === "player") {
+    if (playerTurn === "red") {
+      renderResult("red");
+    } else if (playerTurn === "yellow") {
+      renderResult("yellow");
+    }
+  }
+};
+
 const resetGame = () => {
+  resultInfo.classList.remove("active");
+
   gameState = [
     ["a", "b", "c", "d", "e", "f"],
     ["f", "e", "d", "c", "b", "a"],
@@ -215,8 +277,10 @@ const addChip = (e) => {
   gameboard[columnIndex][rowIndex].classList.add("active", playerTurn);
   gameState[columnIndex][rowIndex] = playerTurn;
 
-  if (checkWin(columnIndex, rowIndex)) {
-    return resetGame();
+  if (checkDraw()) {
+    return checkResult("draw");
+  } else if (checkWin(columnIndex, rowIndex)) {
+    return checkResult("player");
   }
 
   changePlayer();
@@ -242,6 +306,8 @@ const eventBinds = () => {
       column.classList.add("active", playerTurn);
     });
   });
+
+  playAgainBTN.addEventListener("click", resetGame);
 };
 
 eventBinds();
