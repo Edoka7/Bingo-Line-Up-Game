@@ -1,4 +1,4 @@
-# Bingo-Line-Up-Game
+# Bingo Line Up Game
 
 ## Game rules!
 The players play with chips of two different colors. The game consists
