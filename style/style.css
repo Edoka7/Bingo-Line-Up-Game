@@ -170,6 +170,7 @@ h1 {
   left: 0;
   overflow: hidden;
   top: 0;
+  z-index: 1;
 }
 .windowError.active {
   display: -webkit-box;
@@ -218,7 +219,9 @@ h1 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 50%;
+  max-width: 750px;
+  width: 80%;
+  max-width: 450px;
 }
 .windowWin__wrapper p {
   color: #fff;
@@ -329,12 +332,12 @@ h1 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 50%;
+  max-width: 750px;
+  width: 80%;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  padding: 100px;
-  width: 40%;
+  padding: 50px;
 }
 .windowRules__wrapper p:first-child {
   -ms-flex-item-align: center;

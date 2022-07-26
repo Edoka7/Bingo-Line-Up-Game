@@ -2,8 +2,8 @@ const columns = document.querySelectorAll("[data-column]");
 const rows = document.querySelectorAll("[data-row]");
 const resultInfo = document.querySelector(".windowWin");
 const playAgainBTN = document.querySelector(".windowWin button");
-
-let isThrottled = false;
+const rulesBTN = document.querySelector(".rulesButton");
+const restartBTN = document.querySelector(".restartButton");
 
 let playerTurn = "red";
 
@@ -238,7 +238,7 @@ const checkResult = (result) => {
   }
 };
 
-const resetGame = () => {
+const playAgain = () => {
   resultInfo.classList.remove("active");
 
   gameState = [
@@ -290,6 +290,39 @@ const removeClass = (element) => {
   element.classList.remove("active", "red", "yellow");
 };
 
+const showRules = () => {
+  document.querySelector(".windowRules").classList.toggle("active");
+};
+
+const restartGame = () => {
+  gameState = [
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+    ["f", "e", "d", "c", "b", "a"],
+    ["a", "b", "c", "d", "e", "f"],
+  ];
+
+  columns.forEach((column) => {
+    column.classList.remove("active", "red", "yellow");
+  });
+
+  rows.forEach((row) => {
+    removeClass(row);
+  });
+
+  playerTurn = "red";
+
+  redScore = 0;
+  yellowScore = 0;
+  drawScore = 0;
+  gameScore = 0;
+
+  renderScore();
+};
+
 const eventBinds = () => {
   columns.forEach((column) => {
     column.addEventListener("mouseover", () => {
@@ -307,7 +340,14 @@ const eventBinds = () => {
     });
   });
 
-  playAgainBTN.addEventListener("click", resetGame);
+  playAgainBTN.addEventListener("click", playAgain);
+
+  rulesBTN.addEventListener("click", showRules);
+  document
+    .querySelector(".windowRules button")
+    .addEventListener("click", showRules);
+
+  restartBTN.addEventListener("click", restartGame);
 };
 
 eventBinds();
