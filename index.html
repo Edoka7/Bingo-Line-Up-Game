@@ -15,6 +15,11 @@
 
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
     <link rel="stylesheet" href="style/style.css" />
@@ -103,18 +108,27 @@
 
     <div class="windowWin">
       <div class="windowWin__wrapper">
-        <p>THE RED PLAYER WON!</p>
-        <button>play again</button>
+        <p></p>
+        <button><i class="fa-solid fa-arrow-rotate-right"></i></button>
+      </div>
+    </div>
+
+    <button class="rulesButton">RULES</button>
+    <button class="restartButton">RESTART</button>
+
+    <div class="windowRules">
+      <div class="windowRules__wrapper">
+        <p>Game rules</p>
+        <p>
+          The players play with chips of two different colors. The game consists
+          in making moves alternately by throwing one of your tokens into any
+          column with an empty space. The game ends when one of the players
+          places four tokens in a row (vertically, horizontally, or diagonally).
+        </p>
+        <p>Place the tokens on a special board: 6 x 7 rows for tokens.</p>
+        <button>Got it!</button>
       </div>
     </div>
     <script src="js/main.js"></script>
   </body>
 </html>
-
-<!-- <p>
-  The players play with chips of two different colors. The game consists in
-  making moves alternately by throwing one of your tokens into any column
-  with an empty space. The game ends when one of the players places four
-  tokens in a row (vertically, horizontally, or diagonally).
-</p>
-<p>Place the tokens on a special board: 6 x 7 rows for tokens.</p> -->
